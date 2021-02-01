@@ -1,0 +1,180 @@
+<!-- MultiStep Form -->
+<div (click)="VerifierSubmit();" class="container-fluid" id="grad1">
+    <div class="row justify-content-center mt-0">
+        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2><strong>Ajouter un professionnel</strong></h2>
+                <p>Remplir la formulaire suivante</p>
+                <div class="row">
+                    <div class="col-md-12 mx-0">
+                        <form (keyup)="VerifierSubmit()" [formGroup]="registerForm" id="msform"  (ngSubmit)="AddUser(registerForm.value)">
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="account"><strong>Compte</strong></li>
+                                <li id="personal"><strong>Personal</strong></li>
+                                <li id="payment"><strong>Specialisation</strong></li>
+                                <li id="confirm"><strong>Finir</strong></li>
+                            </ul> <!-- fieldsets -->
+                            <fieldset >
+                                <div class="form-card">
+                                    <h2 class="fs-title">Informations de compte</h2> 
+                                    <input formControlName="email" type="email" name="email" placeholder="Email " [ngClass]="{ 'is-invalid': submitted && f.email.errors }"  /> 
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback" style="padding-bottom: 10px;">
+                                        <div *ngIf="f.email.errors.required"><h5 style="color: red;"> Email is required</h5></div>
+                                    </div>
+                                    <input formControlName="username" type="text" name="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="UserName"/>
+                                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback" style="padding-bottom: 10px;">
+                                        <div *ngIf="f.username.errors.required"><h5 style="color: red;"> Username is required</h5></div>
+                                    </div> 
+                                    <input formControlName="pwd" type="password" name="pwd" [ngClass]="{ 'is-invalid': submitted && f.pwd.errors }" placeholder="Password" /> 
+                                    <div *ngIf="submitted && f.pwd.errors" class="invalid-feedback" style="padding-bottom: 10px;">
+                                        <div *ngIf="f.pwd.errors.required"><h5 style="color: red;"> Password is required</h5></div>
+                                    </div>
+                                    <input formControlName="cpwd" type="password" name="cpwd" [ngClass]="{ 'is-invalid': submitted && f.cpwd.errors }" placeholder="Confirm Password" />
+                                    <div *ngIf="submitted && f.cpwd.errors" class="invalid-feedback" style="padding-bottom: 10px;">
+                                        <div *ngIf="f.cpwd.errors.required"><h5 style="color: red;"> Confirm Password is required</h5></div>
+                                    </div>
+                                </div>
+                                <input type="button" name="next" class="next action-button" value="Suivant" />
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title" >&emsp;&ensp;&ensp;Information Personal </h2>
+                                    <input type="text" name="firstName" placeholder="First Name" formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" /> 
+                                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback" style="padding-bottom: 10px;">
+                                        <div *ngIf="f.firstName.errors.required"><h5 style="color: red;"> FirstName is required</h5></div>
+                                    </div>
+                                    <input type="text" name="lastName" placeholder="Last Name" formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" /> 
+                                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback" style="padding-bottom: 10px;">
+                                        <div *ngIf="f.lastName.errors.required"><h5 style="color: red;"> LastName is required</h5></div>
+                                    </div>
+                                    <input type="text" name="phno" placeholder="Contact No." formControlName="phno" [ngClass]="{ 'is-invalid': submitted && f.phno.errors }"  /> 
+                                    <div *ngIf="submitted && f.phno.errors" class="invalid-feedback" style="padding-bottom: 10px;">
+                                        <div *ngIf="f.phno.errors.required"><h5 style="color: red;"> Phone Number is required</h5></div>
+                                    </div>
+                                    <input type="file" name="photo" placeholder="Your picture" formControlName="photo" [ngClass]="{ 'is-invalid': submitted && f.photo.errors }" />
+                                    <div *ngIf="submitted && f.photo.errors" class="invalid-feedback" style="padding-bottom: 10px;">
+                                        <div *ngIf="f.photo.errors.required"><h5 style="color: red;"> Photo is required</h5></div>
+                                    </div>
+                                </div> 
+                                <input type="button" name="previous" class="previous action-button-previous" value="Arrière" /> 
+                                <input type="button" name="next" class="next action-button" value="Suivant" />
+                                
+                            </fieldset>
+
+                            <fieldset (click)="VerifierSubmit();">
+                                <div class="form-card">
+                                    <h2 class="fs-title">Personal Information</h2>
+                                    <select (mouseover)="VerificationTypeUser()" class="custom-select" formControlName="typeUser" name="typeUser" [ngClass]="{ 'is-invalid': submitted && f.typeUser.errors }" >
+                                        <option value="" disabled  >Select a role for user</option>
+                                        <option value="USER" selected>User</option>
+                                        <!-- <option value="ADMIN">Admin</option>-->
+                                    </select>
+                                    <div *ngIf="submitted && f.typeUser.errors" class="invalid-feedback" style="padding-bottom: 10px;">
+                                        <div *ngIf="f.typeUser.errors.required"><h5 style="color: red;"> Photo is required</h5></div>
+                                    </div>
+                                      <br><br>
+                                    <select (mouseover)="DisplayListSecteur()" class="custom-select" formControlName="secteurUser" name="secteurUser" [ngClass]="{ 'is-invalid': submitted && f.secteurUser.errors }">
+                                        <option value="" disabled selected>Select a Secteur</option>
+                                        <option *ngFor="let Secteur of ListSecteur;" value="{{Secteur}}">{{Secteur}}</option>
+                                    </select>
+                                    <div *ngIf="submitted && f.secteurUser.errors" class="invalid-feedback" style="padding-bottom: 10px;">
+                                        <div *ngIf="f.secteurUser.errors.required"><h5 style="color: red;"> Secteur is required</h5></div>
+                                    </div>
+                                      <br><br>
+                                    <select (mouseover)="DisplayListType()" class="custom-select selectType" formControlName="typeSecteurUser" name="typeSecteurUser" [ngClass]="{ 'is-invalid': submitted && f.typeSecteurUser.errors }" >
+                                        <option value="" disabled >Select a Type</option>
+                                        <option *ngFor="let type of ListType;" value={{type}}>{{type}}</option>
+                                    </select>
+                                    <div *ngIf="submitted && f.typeSecteurUser.errors" class="invalid-feedback" style="padding-bottom: 10px;">
+                                        <div *ngIf="f.typeSecteurUser.errors.required"><h5 style="color: red;">Type is required</h5></div>
+                                    </div>
+                                </div> 
+                                <input type="button" name="previous" class="previous action-button-previous" value="Arrière" />
+                                <input *ngIf="!this.isButtonVisible"   type="submit" name="next" class="action-button" value="Suivant" />
+                                <input *ngIf="this.isButtonVisible"  type="submit" name="next" class="next action-button" value="Suivant" />
+                            </fieldset>
+
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title text-center">Success !</h2> <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3"> <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image"> </div>
+                                    </div> <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-7 text-center">
+                                            <h5>You Have Successfully Signed Up</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                            <!--<fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Account Information</h2> 
+                                    <input formControlName="email" type="email" name="email" placeholder="Email " [ngClass]="{ 'is-invalid': submitted && f.title.errors }" ngModel /> 
+                                    <input formControlName="username" type="text" name="username" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" placeholder="UserName" ngModel /> 
+                                    <input formControlName="pwd" type="password" name="pwd" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" placeholder="Password" ngModel /> 
+                                    <input formControlName="cpwd" type="password" name="cpwd" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" placeholder="Confirm Password" ngModel />
+                                </div>
+                                 <input type="button" (click)="ad()" name="next" class="next action-button" value="Next Step" />
+                                 <button  type="submit">ddvvvvvvvvdd</button>
+                            </fieldset>
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title" >&emsp;&ensp;&ensp;Personal Information</h2>
+                                    <input type="text" name="firstName" placeholder="First Name" ngModel required/> 
+                                    <input type="text" name="lastName" placeholder="Last Name" ngModel required/> 
+                                    <input type="text" name="phno" placeholder="Contact No." ngModel required/> 
+                                    <input type="file" name="photo" placeholder="Your picture"  ngModel required/>
+                                </div> <input type="button" name="previous" class="previous action-button-previous" value="Previous" /> <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title">Personal Information</h2>
+                                    <select class="custom-select" name="typeUser" ngModel required>
+                                        <option selected >Select a role for user</option>
+                                        <option value="USER">User</option>
+                                        <option value="ADMIN">Admin</option>
+                                      </select>
+                                      <br><br>
+                                      <select class="custom-select" name="secteurUser" ngModel required>
+                                        <option selected>Select a Secteur</option>
+                                        <option value="Secteur1">Secteur1</option>
+                                        <option value="Secteur2">Secteur2</option>
+                                        <option value="Secteur3">Secteur3</option>
+                                      </select>
+                                      <br><br>
+                                      <select class="custom-select" name="typeSecteurUser" ngModel required>
+                                        <option selected>Select a Type</option>
+                                        <option value="Type1">Type1</option>
+                                        <option value="Type2">Type2</option>
+                                        <option value="Type3">Type3</option>
+                                      </select>
+                                </div> 
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                
+                                 <input type="button" name="next" class="next action-button" value="Next Step" />
+                            </fieldset>
+                            
+                            <fieldset>
+                                <div class="form-card">
+                                    <h2 class="fs-title text-center">Success !</h2> <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3"> <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image"> </div>
+                                    </div> <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-7 text-center">
+                                            <h5>You Have Successfully Signed Up</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>-->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

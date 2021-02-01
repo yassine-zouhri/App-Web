@@ -1,0 +1,96 @@
+<div class="row" style="width: 100%;">
+    <div id="hotel_map" style="width: 100%;"></div>
+    
+    <div style="position: absolute;z-index: inherit 2;" class="ButtonFilter">
+      <button id="clickme" value="Show/Hide" style="width: 40px;height: 40px;">
+        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-funnel-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div  id="displaytable" style="width: 355px;height: 410px;position: absolute;z-index: inherit 2;" class="border border-primary rounded tableFilter">
+      <div class="input-group mb-3 ClassRegion">
+        <div class="input-group-prepend" style="width: 100px;" >
+          <span class="input-group-text" id="basic-addon1" style="width: 100px;color:blue;background-color:rgb(177, 177, 228);">Region</span>
+        </div>
+        <select aria-describedby="basic-addon1" class="form-control FilterRegion" style="width:100px ;">
+          <option value=""></option>
+          <option *ngFor="let nomRegion of NomsRegionFiltre;" value={{nomRegion}}>{{nomRegion}}</option>
+        </select>&nbsp;
+        <button (click)="deleteFilterRegion()" class="btn btn-info icofont btn-icon" style="width: 35px;height: 35px;align-content: center;text-align: center;">
+          <img style="margin-left: -1px;" src="https://img.icons8.com/color/30/000000/delete-sign.png"/>
+        </button>
+      </div>
+      <div class="input-group mb-3 ClassRegion">
+        <div class="input-group-prepend" style="width: 100px;" >
+          <span class="input-group-text" id="basic-addon1" style="width: 100px;color:blue;background-color:rgb(177, 177, 228);">Province</span>
+        </div>
+        <select aria-describedby="basic-addon1" class="form-control FilterProvince" style="width:100px ;">
+          <option value=""></option>
+          <option *ngFor="let nomProvince of NomsProvinceFiltre;" value={{nomProvince}}>{{nomProvince}}</option>
+        </select>&nbsp;
+        <button (click)="deleteFilterProvince()" class="btn btn-info icofont btn-icon" style="width: 35px;height: 35px;align-content: center;text-align: center;">
+          <img style="margin-left: -1px;" src="https://img.icons8.com/color/30/000000/delete-sign.png"/>
+        </button>
+      </div>
+      <div class="input-group mb-3 ClassRegion">
+        <div class="input-group-prepend" style="width: 100px;" >
+          <span class="input-group-text" id="basic-addon1" style="width: 100px;color:blue;background-color:rgb(177, 177, 228);">Ville</span>
+        </div>
+        <select aria-describedby="basic-addon1" class="form-control FilterVille" style="width:100px ;">
+          <option value=""></option>
+          <option *ngFor="let nomVille of NomsVilleFiltre;" value={{nomVille}}>{{nomVille}}</option>
+        </select>&nbsp;
+        <button (click)="deleteFilterVille()" class="btn btn-info icofont btn-icon" style="width: 35px;height: 35px;align-content: center;text-align: center;">
+          <img style="margin-left: -1px;" src="https://img.icons8.com/color/30/000000/delete-sign.png"/>
+        </button>
+      </div>
+      <div class="input-group mb-3 ClassRegion">
+        <div class="input-group-prepend" style="width: 100px;" >
+          <span class="input-group-text" id="basic-addon1" style="width: 100px;color:blue;background-color:rgb(177, 177, 228);">Etat</span>
+        </div>
+        <select aria-describedby="basic-addon1" class="form-control FilterEtat" style="width:100px ;">
+          <option value=""></option>
+          <option value="pris en compte">Pris en compte</option>
+          <option value="en cours de traitement">En cours de traitement</option>
+          <option value="Traité">Traité</option>
+          <option value="Bloqué">Bloqué</option>
+          <option value="redirigé">Redirigé</option>
+          <option value="Validé">Validé</option>
+          <option value="Rejeté">Rejeté</option>
+        </select>&nbsp;
+        <button (click)="deleteFilterEtat()" class="btn btn-info icofont btn-icon" style="width: 35px;height: 35px;align-content: center;text-align: center;">
+          <img style="margin-left: -1px;" src="https://img.icons8.com/color/30/000000/delete-sign.png"/>
+        </button>
+      </div>
+      <div class="input-group mb-3 ClassRegion">
+        <div class="input-group-prepend" style="width: 100px;" >
+          <span class="input-group-text" id="basic-addon1" style="width: 100px;color:blue;background-color:rgb(177, 177, 228);">Secteur</span>
+        </div>
+        <select (change)="DisplayListType()" aria-describedby="basic-addon1" class="form-control FilterSecteur" style="width:100px ;">
+          <option value=""></option>
+          <option *ngFor="let NomSecteur of ListSecteur;" value={{NomSecteur}}>{{NomSecteur}}</option>
+        </select>&nbsp;
+        <button (click)="deleteFilterSecteur()" class="btn btn-info icofont btn-icon" style="width: 35px;height: 35px;align-content: center;text-align: center;">
+          <img style="margin-left: -1px;" src="https://img.icons8.com/color/30/000000/delete-sign.png"/>
+        </button>
+      </div>
+      <div class="input-group mb-3 ClassRegion">
+        <div class="input-group-prepend" style="width: 100px;" >
+          <span class="input-group-text" id="basic-addon1" style="width: 100px;color:blue;background-color:rgb(177, 177, 228);">Type</span>
+        </div>
+        <select aria-describedby="basic-addon1" class="form-control FilterType" style="width:100px ;">
+          <option value=""></option>
+          <option *ngFor="let NomType of ListType;" value={{NomType}}>{{NomType}}</option>
+        </select>&nbsp;
+        <button (click)="deleteFilterType()" class="btn btn-info icofont btn-icon" style="width: 35px;height: 35px;align-content: center;text-align: center;">
+          <img style="margin-left: -1px;" src="https://img.icons8.com/color/30/000000/delete-sign.png"/>
+        </button>
+      </div>
+      <button (click)="getIncident()" type="button" class="btn btn-primary btn-lg btn-block" style="margin-top: 40px;margin-left: 30px;width: 295px;">Filter votre resultat</button>
+    </div>
+</div>
+<!--<button (click)="testJSON()">TESSSSST</button>-->
+
+

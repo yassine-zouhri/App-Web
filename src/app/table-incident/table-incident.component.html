@@ -1,0 +1,134 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center" id="PremiereDIv" >
+                    <tr >
+                        <td>
+                            <div style="height: 70px;border-color: black;border-style: solid;width: 200px;box-shadow: 3px 3px 0px black;">
+                                <h1 style="margin:0;text-align:center;font-size:23px; position:relative;top:-15px;">
+                                    <span style="background:#fff;padding:0 5px;">Secteur</span>
+                                </h1>
+                                <select style="margin-left: 5px;margin-top: -15px;width: 150px;"  class="custom-select" id="secteurfilter" #Secteur2 (change)="ChangeType(Secteur2.value)">
+                                    <option selected value="" disabled>Secteur</option>
+                                    <option  *ngFor="let sec of Secteur1;" value={{sec}}>{{sec}}</option>
+                                </select>
+                            </div>
+                        </td>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <td>
+                            <div style="height: 70px;border-color: black;border-style: solid;width: 200px;box-shadow: 3px 3px 0px black;">
+                                <h1 style="margin:0;text-align:center;font-size:23px; position:relative;top:-15px;">
+                                    <span style="background:#fff;padding:0 5px;">Type</span>
+                                </h1>
+                                <select style="margin-left: 5px;width: 150px;margin-top: -15px;" id="typefilter"  class="custom-select">
+                                    <option selected  value="" disabled>Type</option>
+                                    <option  *ngFor="let ty of MyTypes;" value={{ty}}>{{ty}}</option>
+                                </select>
+                            </div>
+                        </td>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <td>
+                            <div style="height: 70px;border-color: black;border-style: solid;width: 200px;box-shadow: 3px 3px 0px black;">
+                                <h1 style="margin:0;text-align:center;font-size:23px; position:relative;top:-15px;">
+                                    <span style="background:#fff;padding:0 5px;">Province</span>
+                                </h1>
+                                <select style="margin-left: 5px;width: 150px;margin-top: -15px;" id="provinceFilter" class="custom-select" >
+                                    <option selected value="" disabled>Province</option>
+                                    <option  *ngFor="let pro of NomsProvinceFiltre;" value={{pro}}>{{pro}}</option>
+                                </select>
+                            </div>
+                        </td>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <td>
+                            <div style="height: 70px;border-color: black;border-style: solid;width: 200px;box-shadow: 3px 3px 0px black;">
+                                <h1 style="margin:0;text-align:center;font-size:23px; position:relative;top:-15px;">
+                                    <span style="background:#fff;padding:0 5px;">Statut</span>
+                                </h1>
+                                <select style="margin-left: 5px;width: 150px;margin-top: -15px;" id="statutFilter" class="custom-select" >
+                                    <option selected  value="" disabled>Statut</option>
+                                    <option  *ngFor="let sta of Statut;" value={{sta}}>{{sta}}</option>
+                                </select>
+                            </div>
+                        </td>&nbsp;&nbsp;&nbsp;
+                        
+                        <td >
+                            <div style="height: 70px;border-color: black;border-style: none;width: 55px;">
+                                <button (click)="OndeleteFilter()" type="button" class="btn btn-outline-danger" style="margin-top: -40px;width: 100%;height: 100%;position: relative;top: 35px; left: 0;">
+                                    <svg  width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                      </svg>
+                                </button>
+                            </div>
+                        </td>&nbsp;&nbsp;&nbsp;
+                        <td>
+                            <div style="height: 70px;border-color: black;border-style: none;width: 55px;">
+                                <button (click)="onFilter()" type="button" class="btn btn-outline-success" style="margin-top: -40px;width: 100%;height: 100%;position: relative;top: 35px; left: 0;">
+                                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                      </svg>
+                                </button>
+                            </div>
+                        </td>&nbsp;&nbsp;&nbsp;
+                        <td>
+                            <div (click)="generatePdf()" style="height: 70px;border-color: black;border-style: none;width: 55px;">
+                                <button type="button" class="btn btn-outline-warning" style="margin-top: -40px;width: 100%;height: 100%;position: relative;top: 35px; left: 0;">
+                                    <svg xmlns="http://www.w3.org/2000/svg"  width="2em" height="2em" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+                                        <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5z"/>
+                                        <path fill-rule="evenodd" d="M11 9H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+                                        <path fill-rule="evenodd" d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                                      </svg>
+                                </button>
+                            </div>
+                        </td>&nbsp;&nbsp;
+
+                    </tr>
+                </div>
+                <br/>
+                <div class="row" style="margin-top: -30px;">
+                    <div class="col-6">
+                        <button style="margin-left: 20px;width: 500px;" type="button" class="btn btn-outline-primary " (click)="onClickShowTable()">Afficher sur la table</button>
+                    </div>
+                    <div class="col-6">
+                        <button style="width: 500px;" type="button" class="btn btn-outline-primary " (click)="onClickShowMap()">Afficher sur la map</button>
+                    </div>
+                </div>
+                <br/>
+                <div style="margin-top: -10px;" class="table-responsive" id="idTable">
+                    <table id="ExelTable" class="table table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Secteur</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Province</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Statut</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="customtable " *ngIf="MesIncident" >
+                            <tr *ngFor="let incident of IncidentWithPhoto | paginate: { itemsPerPage: 4, currentPage: p }" >
+                                <ng-container>
+                                    <td class="image">
+                                        <img  [src]="incident.photo" style="width: 80px;height: 80px;"/>
+                                    </td>
+                                    <td>{{incident.secteur}}</td>
+                                    <td>{{incident.type}}</td>
+                                    <td>{{incident.province}}</td>
+                                    <td class="afficherTexte DivDescription">{{incident.description}}</td>
+                                    <td>{{incident.statut}}</td>
+                                    <td >{{incident.date}}</td>
+                                </ng-container> 
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+                <div class="map-container" id="mapId" style="height: 500px;width: 100%;"></div>
+            </div>
+        </div>
+    </div>
+    <!--
+    <button (click)="ExportTOExcel()">cccccccccccc</button>
+    <button (click)="ExportToPDF()">pdffffffff</button>-->
+</div>
+

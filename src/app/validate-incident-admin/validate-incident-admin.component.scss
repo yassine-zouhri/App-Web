@@ -1,0 +1,16 @@
+
+
+
+  .afficherTexte {
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    max-width:1px;
+}
+
+.DivDescription:hover {
+    max-width: 180px; /* tweak me please */
+    overflow: visible;
+    white-space: normal;
+    height: auto;
+  }

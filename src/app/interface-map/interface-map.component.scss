@@ -1,0 +1,31 @@
+#hotel_map {
+    height: 600px;
+    width: 100%;
+  }
+@import url(https://openlayers.org/en/v4.6.5/css/ol.css);
+@import url(https://unpkg.com/ol-layerswitcher@3.7.0/src/ol-layerswitcher.css);
+
+.hidden {
+  display: none;
+}
+
+.placeholder {
+  font-size: 12px;
+}
+
+.ClassRegion{
+  left: 30px;
+  width: 300px;
+  top: 20px;
+}
+
+.ButtonFilter{
+  left: 70px;
+  margin-top: 10px;
+}
+
+.tableFilter{
+  left: 120px;
+  margin-top: 10px;
+  background-color: azure;
+}

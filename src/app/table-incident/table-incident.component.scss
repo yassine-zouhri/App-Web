@@ -1,0 +1,36 @@
+.image img {
+    /* La transition s'applique à la fois sur la largeur et la hauteur, avec une durée d'une seconde. */
+    -webkit-transition: all 1s ease; /* Safari et Chrome */
+    -moz-transition: all 1s ease; /* Firefox */
+    -ms-transition: all 1s ease; /* Internet Explorer 9 */
+    -o-transition: all 1s ease; /* Opera */
+    transition: all 1s ease;
+    }
+
+    .zoom {
+        width: 400px;
+        height: 400px;
+        }
+        .image:hover img {
+            /* L'image est doublée */
+            -webkit-transform:scale(3); /* Safari et Chrome */
+            -moz-transform:scale(3); /* Firefox */
+            -ms-transform:scale(3); /* Internet Explorer 9 */
+            -o-transform:scale(3); /* Opera */
+            transform:scale(3);
+            margin-left: 200px;
+            margin-top: 100px;
+            }
+.afficherTexte {
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    max-width:1px;
+}
+
+.DivDescription:hover {
+    max-width: 180px; /* tweak me please */
+    overflow: visible;
+    white-space: normal;
+    height: auto;
+  }

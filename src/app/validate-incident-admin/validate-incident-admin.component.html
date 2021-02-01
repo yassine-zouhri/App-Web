@@ -1,0 +1,131 @@
+
+  <div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="table-responsive" id="idTable">
+                    <table class="table table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Secteur</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Province</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Statut</th>
+                                <th scope="col">Action</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody class="customtable " *ngIf="MyListIncidentWithPhto" >
+                            <tr *ngFor="let incident of MyListIncidentWithPhto | paginate: { itemsPerPage: 4, currentPage: p }" >
+                                <ng-container>
+                                    <td class="image">
+                                        <img  [src]="incident.photo" style="width: 70px;height: 70px;"/>
+                                    </td>
+                                    <td>{{incident.secteur}}</td>
+                                    <td>{{incident.type}}</td>
+                                    <td>{{incident.province}}</td>
+                                    <td class="afficherTexte DivDescription">{{incident.description}}</td>
+                                    <td >{{incident.date1}}</td>
+                                    <td>{{incident.Statut}}</td>
+                                    <td>
+                                      <button type="button" class="btn btn-warning"  data-toggle="modal" [attr.data-target]="'#' + incident.IdReferenceModel" (click)="AfficherMap(incident.IdReferenceModel);HideAttr(incident.IdReferenceModel)" >Editer</button>
+                                      <div  class="modal fade" id="{{incident.IdReferenceModel}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                          <div style="width: 1000px;margin-left: -300px;" class="modal-content">
+                                            <div class="modal-header">
+                                              <button type="button" class="close btn-danger pull-right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <div *ngIf="incident" class="card mb-3" style="width: 100%;">
+                                                <div class="row no-gutters">
+                                                  <div class="col-md-4" style="border-color: rgb(240, 185, 7);border-style: solid;">
+                                                    <img [src]="incident.photo" class="card-img" style="height:100%;width: 100%;" />
+                                                  </div>
+                                                  <div class="col-md-4" style="border-color: rgb(240, 185, 7);border-style: solid;">
+                                                    <div class="map-container mapclass" [attr.id]="'IdMap'+incident.IdReferenceModel" style="height:100%;width: 100%;"></div>
+                                                  </div>
+                                                  <div class="col-md-4" style="border-color: rgb(240, 185, 7);border-style: solid;">
+                                                    <div class="card border-secondary mb-3" style="max-width: 100%;height: 100%;">
+                                                      <div class="card-header" style="padding-left: 50px;font-size: 25px;color: brown;"> Affecter un statut</div>
+                                                      <div class="card-body text-secondary">
+                                                        <h5 class="card-title" style="color: black;">Secteur :{{incident.secteur}}</h5><br/><br/>
+                                                        <h5 class="card-title" style="color: black;">Type :{{incident.type}}</h5><br/><br/>
+                                                        <h5 class="card-title" style="color: black;">Province : {{incident.province}}</h5><br/><br/>
+                                                        <div class="input-group mb-3">
+                                                          <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="basic-addon1">Statut</span>
+                                                          </div>
+                                                          
+                                                          <select [attr.class]="'ClassMap'+incident.IdReferenceModel" (change)="getStatut(incident.IdReferenceModel)" id="MonStatut">
+                                                            <option selected value="" disabled>Statut</option>
+                                                            <option value="Validé">Validé</option>
+                                                            <option value="Rejeté">Rejeté</option>
+                                                            <option value="redirigé">Redirigé</option>
+                                                          </select>
+                                                        </div>
+                                                        <h5 [attr.class]="'motif1'+incident.IdReferenceModel "  style="color: black;" id="motif1">Motif :</h5><br/>
+                                                        <textarea [attr.class]="'motif'+incident.IdReferenceModel"  class="motif" style="height: 100px;width: 100%;" id="motif"></textarea>
+                                                        
+                                                        <div [attr.class]="'SecteurIncident'+incident.IdReferenceModel">
+                                                          <div  class="input-group mb-3" >
+                                                            <div class="input-group-prepend">
+                                                              <span class="input-group-text" id="basic-addon1">Secteur</span>
+                                                            </div>
+                                                            
+                                                            <select  (change)="getSecteur(MonSecteurIncident.value)" #MonSecteurIncident  >
+                                                              <option selected value="" disabled>Secteur</option>
+                                                              <option *ngFor="let Secteur11 of Secteur1" [value]="Secteur11">{{Secteur11}}</option>
+                                                            </select>
+                                                          </div>
+                                                        </div>
+                                                        
+
+                                                        <div [attr.class]="'TypeIncident'+incident.IdReferenceModel">
+                                                          <div class="input-group mb-3" >
+                                                            <div class="input-group-prepend">
+                                                              <span class="input-group-text" id="basic-addon1">Type</span>
+                                                            </div>
+                                                            
+                                                            <select (change)="getType(MonTypeIncident.value)"    #MonTypeIncident >
+                                                              <option selected value="" disabled>Type</option>
+                                                              <option *ngFor="let type11 of MyTypes" value={{type11}} >{{type11}}</option>
+                                                            </select>
+                                                          </div>
+                                                        </div>
+                                                        
+                                                        
+                                                        
+                                                        
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              
+                                       
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" (click)="ValiderStatut(incident.id,incident.IdReferenceModel)" class="btn btn btn-success" data-dismiss="modal">Save</button>
+                                              <button type="button" class="btn btn-orange" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    
+                                </ng-container>
+                                 
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls previousLabel="Arrière" nextLabel="Suivant" (pageChange)="p = $event;" ></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+   
